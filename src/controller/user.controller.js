@@ -1,7 +1,6 @@
 import bcrypt from "bcrypt";
-import catchAsync from "../utils/catchAsync";
-import userModel from "../models/userModel";
-
+import catchAsync from "../utils/catchAsync.js";
+import userModel from "../models/user.model.js";
 export const registerUser = catchAsync(async (req, res) => {
   const userData = req.body;
 
