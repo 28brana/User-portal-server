@@ -50,11 +50,10 @@ export const loginUser = catchAsync(async (req, res) => {
   });
 });
 
-export const updateUser = catchAsync(async (req, res) => {
-  const { userId } = req.params;
+export const updateUserByEmail = catchAsync(async (req, res) => {
   const updatedUserData = req.body;
 
-  const user = await userModel.findById(userId);
+  const user = await userModel.findOne({ email:req.body.email });
 
   if (!user) {
     return res.status(404).json({
@@ -72,10 +71,9 @@ export const updateUser = catchAsync(async (req, res) => {
 });
 
 export const changePassword = catchAsync(async (req, res) => {
-  const { userId } = req.params;
-  const { oldPassword, newPassword } = req.body;
+  const { oldPassword, newPassword ,email} = req.body;
 
-  const user = await userModel.findById(userId);
+  const user = await userModel.findOne({ email });
 
   if (!user) {
     return res.status(404).json({
@@ -101,3 +99,4 @@ export const changePassword = catchAsync(async (req, res) => {
     message: "Password changed successfully.",
   });
 });
+
